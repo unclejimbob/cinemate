@@ -23,13 +23,13 @@
         </p>
         <p
           v-if="overview"
-          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-left text-black bg-white-700 rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           {{ overview }}
         </p>
         <p
           v-else
-          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-left text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           No overview available
         </p>
@@ -39,6 +39,10 @@
 </template>
 
 <script lang="ts" setup>
+// Find a movie
+// https://developer.themoviedb.org/reference/discover-movie
+
+// Get its details
 // https://developer.themoviedb.org/reference/movie-details
 defineProps([
   "title",
@@ -48,20 +52,17 @@ defineProps([
   "popularity",
   "poster_path",
   "item",
-  "homepage",
-  "imdb_id",
-  "revenue",
 ]);
 
-const imageSiteURL = "https://image.tmdb.org/t/p/w500";
+const runtimeConfig = useRuntimeConfig();
+
+const imageSiteURL = runtimeConfig.public.imageSiteURL;
 
 const itemState = useState("chosenItem", () => {});
 
 const changeItemState = (item) => {
   itemState.value = item;
 };
-
-//const computed = imageSiteURL&poster_path
 </script>
 
-<style></style>
+<style scoped></style>
